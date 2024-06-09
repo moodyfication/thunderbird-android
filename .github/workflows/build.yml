@@ -41,6 +41,7 @@ jobs:
         if ! ./gradlew assembleRelease; then
             exit_on_error "Build failed for '$APK_VERSION_TAG' build."
         fi
+        ls -lah ./app/build/outputs/apk
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
