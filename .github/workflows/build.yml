@@ -35,13 +35,13 @@ jobs:
       run: |
         exit_on_error(){ echo $1; exit 1; }
         echo "Setting env";
-        APK_DIR_PATH="./app-k9mail/build/outputs/apk/"
+        APK_DIR_PATH="./app-k9mail/build/outputs/apk/release"
         # Used by attachment steps later
         echo "APK_DIR_PATH=$APK_DIR_PATH" >> $GITHUB_ENV
         if ! ./gradlew assembleRelease --build-cache; then
             exit_on_error "Build failed for '$APK_VERSION_TAG' build."
         fi
-        ls -lah ./app-k9mail/build/outputs/apk
+        ls -lah ./app-k9mail/build/outputs/apk/release
         echo "--------"
     - name: Gradle Cache
       uses: actions/cache@v3
