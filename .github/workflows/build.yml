@@ -36,6 +36,8 @@ jobs:
         exit_on_error(){ echo $1; exit 1; }
         echo "Setting env";
         APK_DIR_PATH="./app/build/outputs/apk/debug"
+        # Used by attachment steps later
+        echo "APK_DIR_PATH=$APK_DIR_PATH" >> $GITHUB_ENV
         if ! ./gradlew assembleRelease; then
             exit_on_error "Build failed for '$APK_VERSION_TAG' build."
         fi
