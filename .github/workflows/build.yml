@@ -31,9 +31,20 @@ jobs:
     - name: Make Gradle executable
       run: chmod +x ./gradlew
     - name: Build Release APK
-      run: ./gradlew assembleRelease
-    - name: Releasing using Hub
-      uses: sangatdesai/release-apk@main
-      env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       APP_FOLDER: app
+      shell: bash {0}
+      run: |
+        exit_on_error(){ echo $1; exit 1; }
+        echo "Setting env";
+        APK_DIR_PATH="./app/build/outputs/apk/debug"
+        if ! ./gradlew assembleRelease; then
+            exit_on_error "Build failed for '$APK_VERSION_TAG' build."
+        fi
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      path: |
+        ${{env.APK_DIR_PATH}/*.apk
+#   - name: Releasing using Hub
+#     uses: sangatdesai/release-apk@main
+#     env:
+#      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      APP_FOLDER: app
