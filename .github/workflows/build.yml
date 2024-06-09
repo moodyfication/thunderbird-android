@@ -41,8 +41,10 @@ jobs:
         fi
     - name: Upload artifact
       uses: actions/upload-artifact@v4
-      path: |
-        ${{env.APK_DIR_PATH}/*.apk
+      with:
+        name: thunderbird-android.apk
+        path: |
+          ${{env.APK_DIR_PATH}/*.apk
 #   - name: Releasing using Hub
 #     uses: sangatdesai/release-apk@main
 #     env:
