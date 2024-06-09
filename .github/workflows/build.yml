@@ -41,11 +41,10 @@ jobs:
         if ! ./gradlew assembleRelease --build-cache; then
             exit_on_error "Build failed for '$APK_VERSION_TAG' build."
         fi
-        ls -lah ./app-k9mail/build/outputs
+        ls -lah ./app-k9mail/build/outputs/apk
         echo "--------"
-        ls -lah ${{ env.APK_DIR_PATH }}
     - name: Gradle Cache
-      uses: actions/cache@v4
+      uses: actions/cache@v3
       with:
         path: |
           ~/.gradle/caches
@@ -57,7 +56,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: thunderbird-android.apk
-        path: ${{ env.APK_DIR_PATH }}/*.apk
+        path: ${{ env.APK_DIR_PATH }}
 #   - name: Releasing using Hub
 #     uses: sangatdesai/release-apk@main
 #     env:
