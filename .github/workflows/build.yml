@@ -35,7 +35,7 @@ jobs:
       run: |
         exit_on_error(){ echo $1; exit 1; }
         echo "Setting env";
-        APK_DIR_PATH="./app/build/outputs/apk/debug"
+        APK_DIR_PATH="./app/build/outputs/apk/release"
         # Used by attachment steps later
         echo "APK_DIR_PATH=$APK_DIR_PATH" >> $GITHUB_ENV
         if ! ./gradlew assembleRelease; then
